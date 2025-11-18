@@ -7,1356 +7,21 @@
     <link rel="icon" type="image/png" href="https://i.postimg.cc/PrXhCbQL/Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #FF2D55;
-            --primary-dark: #D61142;
-            --secondary: #5E5CE6;
-            --accent: #FF9500;
-            --success: #34C759;
-            --dark: #000000;
-            --dark-elevated: #1C1C1E;
-            --dark-card: #2C2C2E;
-            --light: #FFFFFF;
-            --gray-1: #8E8E93;
-            --gray-2: #636366;
-            --gray-3: #48484A;
-            --spacing-xs: 8px;
-            --spacing-sm: 16px;
-            --spacing-md: 24px;
-            --spacing-lg: 32px;
-            --spacing-xl: 48px;
-            --spacing-2xl: 64px;
-            --radius-sm: 12px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.25);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        header.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-            box-shadow: var(--shadow-md);
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: var(--transition);
-        }
-
-        .logo:hover {
-            transform: scale(1.02);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-md);
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 500;
-            font-size: 15px;
-            transition: var(--transition);
-            padding: 8px 12px;
-            border-radius: 8px;
-        }
-
-        .nav-links a:hover {
-            color: var(--light);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .header-cta {
-            padding: 10px 20px;
-            background: var(--primary);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .header-cta:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        /* MEJORA ESPECÍFICA DEL BOTÓN MÓVIL */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            position: absolute;
-            right: var(--spacing-lg);
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1001;
-        }
-
-        .mobile-menu-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu-btn i {
-            font-size: 20px;
-            transition: var(--transition);
-        }
-
-        .mobile-menu-btn.active i {
-            transform: rotate(90deg);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 120px var(--spacing-lg) var(--spacing-2xl);
-            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-elevated) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(255, 45, 85, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: var(--spacing-2xl);
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(255, 45, 85, 0.1);
-            border: 1px solid rgba(255, 45, 85, 0.3);
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: var(--spacing-md);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        .hero-title {
-            font-size: 56px;
-            font-weight: 800;
-            letter-spacing: -2px;
-            margin-bottom: var(--spacing-md);
-            line-height: 1.1;
-            background: linear-gradient(135deg, var(--light) 0%, rgba(255, 255, 255, 0.7) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-description {
-            font-size: 20px;
-            color: var(--gray-1);
-            margin-bottom: var(--spacing-lg);
-            max-width: 540px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 45, 85, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--dark-card);
-            color: white;
-            border: 1px solid var(--gray-3);
-        }
-
-        .btn-secondary:hover {
-            background: var(--gray-3);
-            transform: translateY(-2px);
-        }
-
-        /* Coupon Cards */
-        .coupons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-sm);
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .coupon-card {
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-md);
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coupon-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .coupon-card:hover::before {
-            left: 100%;
-        }
-
-        .coupon-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .coupon-icon {
-            font-size: 32px;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .coupon-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .coupon-code {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px dashed rgba(255, 215, 0, 0.4);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #FFD700;
-            margin: var(--spacing-xs) 0;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .coupon-code:hover {
-            background: rgba(255, 215, 0, 0.2);
-            transform: scale(1.05);
-        }
-
-        .coupon-btn {
-            padding: 8px 20px;
-            background: var(--primary);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: var(--spacing-xs);
-        }
-
-        .coupon-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Influencer Banner */
-        .influencer-banner {
-            background: linear-gradient(135deg, #FF6B6B 0%, #F093FB 50%, #667EEA 100%);
-            background-size: 200% 200%;
-            animation: gradientFlow 8s ease infinite;
-            padding: var(--spacing-2xl) var(--spacing-lg);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes gradientFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .influencer-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .banner-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .banner-icon {
-            font-size: 64px;
-            margin-bottom: var(--spacing-md);
-            animation: bounce 2s infinite;
-            display: inline-block;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .banner-title {
-            font-size: 48px;
-            font-weight: 900;
-            margin-bottom: var(--spacing-sm);
-            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-            letter-spacing: -1px;
-        }
-
-        .banner-subtitle {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: var(--spacing-lg);
-            opacity: 0.95;
-        }
-
-        .banner-code-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
-            margin: var(--spacing-lg) auto;
-            max-width: 500px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .banner-link {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: var(--spacing-sm);
-            word-break: break-all;
-        }
-
-        .banner-code {
-            font-size: 28px;
-            font-weight: 900;
-            color: #FF6B6B;
-            font-family: 'Courier New', monospace;
-            background: rgba(255, 107, 107, 0.1);
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--radius-sm);
-            display: inline-block;
-        }
-
-        .banner-cta {
-            padding: 18px 48px;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-elevated) 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition);
-            display: inline-block;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .banner-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
-        }
-
-        .banner-benefits {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-lg);
-            flex-wrap: wrap;
-        }
-
-        .benefit-chip {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Search Section */
-        .search-section {
-            padding: var(--spacing-2xl) var(--spacing-lg);
-            background: var(--dark-elevated);
-        }
-
-        .search-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .search-title {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: var(--spacing-md);
-            letter-spacing: -1px;
-        }
-
-        .search-bar {
-            position: relative;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 18px 160px 18px 56px;
-            border: 2px solid var(--gray-3);
-            border-radius: 50px;
-            font-size: 16px;
-            background: var(--dark-card);
-            color: white;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            border-color: var(--primary);
-            background: var(--dark-elevated);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-1);
-            font-size: 20px;
-        }
-
-        .search-btn {
-            position: absolute;
-            right: 6px;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 12px 32px;
-            background: var(--primary);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .search-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        .search-results-text {
-            color: var(--gray-1);
-            font-size: 14px;
-        }
-
-        /* Categories */
-        .categories-section {
-            padding: var(--spacing-xl) var(--spacing-lg);
-            background: var(--dark);
-        }
-
-        .categories-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .categories-title {
-            font-size: 18px;
-            color: var(--gray-1);
-            text-align: center;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .categories-grid {
-            display: flex;
-            gap: var(--spacing-sm);
-            overflow-x: auto;
-            padding-bottom: var(--spacing-sm);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .category-chip {
-            padding: 12px 24px;
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: 50px;
-            color: white;
-            cursor: pointer;
-            transition: var(--transition);
-            white-space: nowrap;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .category-chip:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* About Section */
-        .about-section {
-            padding: var(--spacing-2xl) var(--spacing-lg);
-            background: var(--dark-elevated);
-        }
-
-        .about-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-2xl);
-            align-items: center;
-        }
-
-        .about-content h2 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: var(--spacing-md);
-            letter-spacing: -1px;
-        }
-
-        .about-content p {
-            font-size: 18px;
-            color: var(--gray-1);
-            margin-bottom: var(--spacing-md);
-            line-height: 1.7;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-lg);
-        }
-
-        .stat-card {
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-md);
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--gray-1);
-        }
-
-        .about-features {
-            display: grid;
-            gap: var(--spacing-md);
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--spacing-sm);
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-md);
-            transition: var(--transition);
-        }
-
-        .feature-item:hover {
-            border-color: var(--primary);
-            transform: translateX(8px);
-        }
-
-        .feature-icon {
-            font-size: 24px;
-            color: var(--primary);
-        }
-
-        .feature-content h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .feature-content p {
-            font-size: 15px;
-            color: var(--gray-1);
-            margin: 0;
-        }
-
-        /* Products Grid */
-        .products-section {
-            padding: var(--spacing-2xl) var(--spacing-lg);
-            background: var(--dark);
-        }
-
-        .products-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .products-header {
-            text-align: center;
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .products-header h2 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: var(--spacing-sm);
-            letter-spacing: -1px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .product-card {
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: var(--spacing-sm);
-            left: var(--spacing-sm);
-            padding: 6px 12px;
-            background: var(--primary);
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            z-index: 10;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 240px;
-            background: var(--dark-elevated);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .product-image:hover img {
-            transform: scale(1.05);
-        }
-
-        .product-image-icon {
-            font-size: 80px;
-        }
-
-        .product-info {
-            padding: var(--spacing-md);
-        }
-
-        .product-category {
-            font-size: 12px;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: var(--spacing-xs);
-            letter-spacing: 0.5px;
-        }
-
-        .product-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .product-description {
-            font-size: 14px;
-            color: var(--gray-1);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .product-btn {
-            padding: 12px 24px;
-            background: var(--primary);
-            border: none;
-            border-radius: var(--radius-sm);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .product-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-xl);
-        }
-
-        .pagination-btn {
-            padding: 12px 20px;
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-sm);
-            color: white;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-        }
-
-        .pagination-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .pagination-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .pagination-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Footer */
-        footer {
-            padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
-            background: var(--dark-elevated);
-            border-top: 1px solid var(--gray-3);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: var(--spacing-md);
-            font-weight: 700;
-        }
-
-        .footer-column p {
-            color: var(--gray-1);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .footer-links a {
-            color: var(--gray-1);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .social-links {
-            display: flex;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-md);
-        }
-
-        .social-link {
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--dark-card);
-            border: 1px solid var(--gray-3);
-            border-radius: 50%;
-            font-size: 18px;
-            transition: var(--transition);
-            text-decoration: none;
-            color: var(--light);
-        }
-
-        .social-link:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: var(--spacing-lg);
-            border-top: 1px solid var(--gray-3);
-        }
-
-        .footer-bottom p {
-            color: var(--gray-1);
-            font-size: 14px;
-        }
-
-        /* Popup Styles */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-content {
-            background: var(--dark-card);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-xl);
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            transform: scale(0.9);
-            transition: var(--transition);
-        }
-
-        .popup-overlay.active .popup-content {
-            transform: scale(1);
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--gray-1);
-            font-size: 24px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .popup-close:hover {
-            color: var(--primary);
-        }
-
-        .popup-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .popup-links {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-sm);
-        }
-
-        .popup-link {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm);
-            background: var(--dark-elevated);
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .popup-link:hover {
-            background: var(--primary);
-        }
-
-        .popup-link-icon {
-            font-size: 20px;
-        }
-
-        /* Coupons Popup Styles - IMPROVED DESIGN */
-        .coupons-popup-content {
-            max-width: 700px;
-            width: 90%;
-        }
-
-        .coupons-popup-title {
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-            font-size: 28px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .coupons-popup-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .coupon-popup-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--dark-elevated);
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-md);
-            transition: var(--transition);
-        }
-
-        .coupon-popup-item:hover {
-            border-color: var(--primary);
-            transform: translateX(4px);
-        }
-
-        .coupon-popup-info {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            flex: 1;
-        }
-
-        .coupon-popup-icon {
-            font-size: 32px;
-            width: 50px;
-            text-align: center;
-        }
-
-        .coupon-popup-details {
-            flex: 1;
-        }
-
-        .coupon-popup-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .coupon-popup-code {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px dashed rgba(255, 215, 0, 0.4);
-            border-radius: 6px;
-            padding: 6px 10px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #FFD700;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-block;
-        }
-
-        .coupon-popup-code:hover {
-            background: rgba(255, 215, 0, 0.2);
-            transform: scale(1.05);
-        }
-
-        .coupon-popup-btn {
-            padding: 10px 20px;
-            background: var(--primary);
-            border: none;
-            border-radius: var(--radius-sm);
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            white-space: nowrap;
-        }
-
-        .coupon-popup-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .affiliate-btn {
-            width: 100%;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: var(--radius-md);
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: var(--spacing-md);
-        }
-
-        .affiliate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 45, 85, 0.4);
-        }
-
-        /* Resource Popup Content Styles */
-        .resource-content {
-            color: var(--gray-1);
-            line-height: 1.7;
-        }
-
-        .resource-content h4 {
-            color: var(--light);
-            margin-bottom: var(--spacing-sm);
-            font-size: 18px;
-        }
-
-        .resource-content p {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .resource-content ul {
-            margin-left: var(--spacing-md);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .resource-content li {
-            margin-bottom: var(--spacing-xs);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-xl);
-            }
-
-            .hero-title {
-                font-size: 42px;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-stats {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                flex-direction: column;
-                padding: var(--spacing-md);
-                gap: var(--spacing-sm);
-                border-top: 1px solid var(--gray-3);
-                z-index: 999;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .banner-title {
-                font-size: 36px;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            }
-
-            .coupon-popup-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--spacing-sm);
-            }
-
-            .coupon-popup-info {
-                width: 100%;
-            }
-
-            .coupon-popup-btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero-title {
-                font-size: 36px;
-            }
-
-            .hero-description {
-                font-size: 18px;
-            }
-
-            .coupons-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .banner-title {
-                font-size: 28px;
-            }
-
-            .banner-subtitle {
-                font-size: 18px;
-            }
-
-            .search-input {
-                padding: 16px 16px 16px 48px;
-            }
-
-            .search-btn {
-                position: static;
-                transform: none;
-                width: 100%;
-                margin-top: var(--spacing-sm);
-                border-radius: 50px;
-            }
-
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .pagination {
-                flex-wrap: wrap;
-            }
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading animation */
-        .loading {
-            text-align: center;
-            padding: var(--spacing-xl);
-            color: var(--gray-1);
-        }
+        *{margin:0;padding:0;box-sizing:border-box}:root{--primary:#FF2D55;--primary-dark:#D61142;--secondary:#5E5CE6;--accent:#FF9500;--success:#34C759;--dark:#000000;--dark-elevated:#1C1C1E;--dark-card:#2C2C2E;--light:#FFFFFF;--gray-1:#8E8E93;--gray-2:#636366;--gray-3:#48484A;--spacing-xs:8px;--spacing-sm:16px;--spacing-md:24px;--spacing-lg:32px;--spacing-xl:48px;--spacing-2xl:64px;--radius-sm:12px;--radius-md:16px;--radius-lg:24px;--shadow-sm:0 2px 8px rgba(0,0,0,0.1);--shadow-md:0 8px 24px rgba(0,0,0,0.15);--shadow-lg:0 16px 48px rgba(0,0,0,0.25);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;background:var(--dark);color:var(--light);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}header{position:fixed;width:100%;top:0;z-index:1000;background:rgba(0,0,0,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:0.5px solid rgba(255,255,255,0.1);transition:var(--transition)}header.scrolled{background:rgba(0,0,0,0.95);box-shadow:var(--shadow-md)}.header-container{max-width:1400px;margin:0 auto;padding:var(--spacing-sm) var(--spacing-lg);display:flex;justify-content:space-between;align-items:center;position:relative}.logo{font-size:22px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:var(--transition)}.logo:hover{transform:scale(1.02)}.nav-links{display:flex;gap:var(--spacing-md);align-items:center}.nav-links a{text-decoration:none;color:rgba(255,255,255,0.85);font-weight:500;font-size:15px;transition:var(--transition);padding:8px 12px;border-radius:8px}.nav-links a:hover{color:var(--light);background:rgba(255,255,255,0.1)}.header-cta{padding:10px 20px;background:var(--primary);border:none;border-radius:20px;color:white;font-weight:600;cursor:pointer;transition:var(--transition);text-decoration:none;font-size:14px}.header-cta:hover{background:var(--primary-dark);transform:scale(1.05)}.mobile-menu-btn{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:white;width:44px;height:44px;border-radius:50%;align-items:center;justify-content:center;transition:var(--transition);position:absolute;right:var(--spacing-lg);top:50%;transform:translateY(-50%);z-index:1001}.mobile-menu-btn:hover{background:rgba(255,255,255,0.1)}.mobile-menu-btn i{font-size:20px;transition:var(--transition)}.mobile-menu-btn.active i{transform:rotate(90deg)}.hero{padding:120px var(--spacing-lg) var(--spacing-2xl);background:linear-gradient(180deg,var(--dark) 0%,var(--dark-elevated) 100%);position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(255,45,85,0.15) 0%,transparent 70%);border-radius:50%;animation:float 20s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(180deg)}}.hero-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:var(--spacing-2xl);align-items:center;position:relative;z-index:1}.hero-content{animation:fadeInUp 0.8s ease-out}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,45,85,0.1);border:1px solid rgba(255,45,85,0.3);border-radius:20px;font-size:14px;font-weight:600;color:var(--primary);margin-bottom:var(--spacing-md);animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}.hero-title{font-size:56px;font-weight:800;letter-spacing:-2px;margin-bottom:var(--spacing-md);line-height:1.1;background:linear-gradient(135deg,var(--light) 0%,rgba(255,255,255,0.7) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero-description{font-size:20px;color:var(--gray-1);margin-bottom:var(--spacing-lg);max-width:540px}.hero-buttons{display:flex;gap:var(--spacing-sm);flex-wrap:wrap}.btn-primary,.btn-secondary{padding:16px 32px;border-radius:12px;font-weight:600;font-size:16px;cursor:pointer;transition:var(--transition);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:none}.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,45,85,0.4)}.btn-secondary{background:var(--dark-card);color:white;border:1px solid var(--gray-3)}.btn-secondary:hover{background:var(--gray-3);transform:translateY(-2px)}.coupons-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-sm);animation:fadeInUp 0.8s ease-out 0.2s backwards}.coupon-card{background:var(--dark-card);border:1px solid var(--gray-3);border-radius:var(--radius-md);padding:var(--spacing-md);text-align:center;transition:var(--transition);cursor:pointer;position:relative;overflow:hidden}.coupon-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:left 0.5s}.coupon-card:hover::before{left:100%}.coupon-card:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:var(--shadow-md)}.coupon-icon{font-size:32px;margin-bottom:var(--spacing-xs)}.coupon-title{font-size:16px;font-weight:700;margin-bottom:var(--spacing-xs)}.coupon-code{background:rgba(255,215,0,0.1);border:2px dashed rgba(255,215,0,0.4);border-radius:8px;padding:8px 12px;font-size:14px;font-weight:700;color:#FFD700;margin:var(--spacing-xs) 0;font-family:'Courier New',monospace;cursor:pointer;transition:var(--transition)}.coupon-code:hover{background:rgba(255,215,0,0.2);transform:scale(1.05)}.coupon-btn{padding:8px 20px;background:var(--primary);border:none;border-radius:8px;color:white;font-weight:600;font-size:13px;cursor:pointer;transition:var(--transition);text-decoration:none;display:inline-block;margin-top:var(--spacing-xs)}.coupon-btn:hover{background:var(--primary-dark)}.influencer-banner{background:linear-gradient(135deg,#FF6B6B 0%,#F093FB 50%,#667EEA 100%);background-size:200% 200%;animation:gradientFlow 8s ease infinite;padding:var(--spacing-2xl) var(--spacing-lg);text-align:center;position:relative;overflow:hidden}@keyframes gradientFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}.influencer-banner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);animation:rotate 30s linear infinite}@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.banner-content{max-width:900px;margin:0 auto;position:relative;z-index:1}.banner-icon{font-size:64px;margin-bottom:var(--spacing-md);animation:bounce 2s infinite;display:inline-block}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}.banner-title{font-size:48px;font-weight:900;margin-bottom:var(--spacing-sm);text-shadow:0 4px 16px rgba(0,0,0,0.3);letter-spacing:-1px}.banner-subtitle{font-size:22px;font-weight:600;margin-bottom:var(--spacing-lg);opacity:0.95}.banner-code-box{background:rgba(255,255,255,0.95);border-radius:var(--radius-md);padding:var(--spacing-lg);margin:var(--spacing-lg) auto;max-width:500px;box-shadow:var(--shadow-lg)}.banner-link{font-size:18px;font-weight:700;color:var(--primary);margin-bottom:var(--spacing-sm);word-break:break-all}.banner-code{font-size:28px;font-weight:900;color:#FF6B6B;font-family:'Courier New',monospace;background:rgba(255,107,107,0.1);padding:var(--spacing-sm) var(--spacing-md);border-radius:var(--radius-sm);display:inline-block}.banner-cta{padding:18px 48px;background:linear-gradient(135deg,var(--dark) 0%,var(--dark-elevated) 100%);color:white;border:none;border-radius:50px;font-weight:800;font-size:18px;cursor:pointer;text-decoration:none;transition:var(--transition);display:inline-block;box-shadow:0 8px 32px rgba(0,0,0,0.3)}.banner-cta:hover{transform:scale(1.05);box-shadow:0 12px 48px rgba(0,0,0,0.5)}.banner-benefits{display:flex;justify-content:center;gap:var(--spacing-sm);margin-top:var(--spacing-lg);flex-wrap:wrap}.benefit-chip{background:rgba(255,255,255,0.2);padding:10px 20px;border-radius:50px;font-weight:600;font-size:14px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3)}.search-section{padding:var(--spacing-2xl) var(--spacing-lg);background:var(--dark-elevated)}.search-container{max-width:800px;margin:0 auto;text-align:center}.search-title{font-size:36px;font-weight:800;margin-bottom:var(--spacing-md);letter-spacing:-1px}.search-bar{position:relative;margin-bottom:var(--spacing-sm)}.search-input{width:100%;padding:18px 160px 18px 56px;border:2px solid var(--gray-3);border-radius:50px;font-size:16px;background:var(--dark-card);color:white;outline:none;transition:var(--transition)}.search-input:focus{border-color:var(--primary);background:var(--dark-elevated)}.search-icon{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--gray-1);font-size:20px}.search-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:12px 32px;background:var(--primary);border:none;border-radius:50px;color:white;font-weight:600;cursor:pointer;transition:var(--transition)}.search-btn:hover{background:var(--primary-dark)}.search-results-text{color:var(--gray-1);font-size:14px}.categories-section{padding:var(--spacing-xl) var(--spacing-lg);background:var(--dark)}.categories-container{max-width:1400px;margin:0 auto}.categories-title{font-size:18px;color:var(--gray-1);text-align:center;margin-bottom:var(--spacing-md)}.categories-grid{display:flex;gap:var(--spacing-sm);overflow-x:auto;padding-bottom:var(--spacing-sm);justify-content:center;flex-wrap:wrap}.category-chip{padding:12px 24px;background:var(--dark-card);border:1px solid var(--gray-3);border-radius:50px;color:white;cursor:pointer;transition:var(--transition);white-space:nowrap;font-weight:600;font-size:14px}.category-chip:hover{background:var(--primary);border-color:var(--primary);transform:translateY(-2px)}.about-section{padding:var(--spacing-2xl) var(--spacing-lg);background:var(--dark-elevated)}.about-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2xl);align-items:center}.about-content h2{font-size:42px;font-weight:800;margin-bottom:var(--spacing-md);letter-spacing:-1px}.about-content p{font-size:18px;color:var(--gray-1);margin-bottom:var(--spacing-md);line-height:1.7}.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-md);margin-top:var(--spacing-lg)}.stat-card{background:var(--dark-card);border:1px solid var(--gray-3);border-radius:var(--radius-md);padding:var(--spacing-md);text-align:center}.stat-number{font-size:32px;font-weight:800;color:var(--primary);margin-bottom:var(--spacing-xs)}.stat-label{font-size:14px;color:var(--gray-1)}.about-features{display:grid;gap:var(--spacing-md)}.feature-item{display:flex;align-items:flex-start;gap:var(--spacing-sm);background:var(--dark-card);border:1px solid var(--gray-3);border-radius:var(--radius-md);padding:var(--spacing-md);transition:var(--transition)}.feature-item:hover{border-color:var(--primary);transform:translateX(8px)}.feature-icon{font-size:24px;color:var(--primary)}.feature-content h3{font-size:18px;font-weight:700;margin-bottom:var(--spacing-xs)}.feature-content p{font-size:15px;color:var(--gray-1);margin:0}.products-section{padding:var(--spacing-2xl) var(--spacing-lg);background:var(--dark)}.products-container{max-width:1400px;margin:0 auto}.products-header{text-align:center;margin-bottom:var(--spacing-xl)}.products-header h2{font-size:42px;font-weight:800;margin-bottom:var(--spacing-sm);letter-spacing:-1px}.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--spacing-lg)}.product-card{background:var(--dark-card);border:1px solid var(--gray-3);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);cursor:pointer;position:relative}.product-card:hover{transform:translateY(-8px);border-color:var(--primary);box-shadow:var(--shadow-lg)}.product-badge{position:absolute;top:var(--spacing-sm);left:var(--spacing-sm);padding:6px 12px;background:var(--primary);border-radius:6px;font-size:12px;font-weight:700;z-index:10}.product-image{width:100%;height:240px;background:var(--dark-elevated);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover;transition:var(--transition)}.product-image:hover img{transform:scale(1.05)}.product-image-icon{font-size:80px}.product-info{padding:var(--spacing-md)}.product-category{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;margin-bottom:var(--spacing-xs);letter-spacing:0.5px}.product-title{font-size:18px;font-weight:700;margin-bottom:var(--spacing-xs)}.product-description{font-size:14px;color:var(--gray-1);margin-bottom:var(--spacing-md)}.product-footer{display:flex;justify-content:space-between;align-items:center}.product-btn{padding:12px 24px;background:var(--primary);border:none;border-radius:var(--radius-sm);color:white;font-weight:600;cursor:pointer;transition:var(--transition);font-size:14px;text-decoration:none;display:inline-block}.product-btn:hover{background:var(--primary-dark)}.pagination{display:flex;justify-content:center;gap:var(--spacing-sm);margin-top:var(--spacing-xl)}.pagination-btn{padding:12px 20px;background:var(--dark-card);border:1px solid var(--gray-3);border-radius:var(--radius-sm);color:white;cursor:pointer;transition:var(--transition);font-weight:600}.pagination-btn:hover{background:var(--primary);border-color:var(--primary)}.pagination-btn.active{background:var(--primary);border-color:var(--primary)}.pagination-btn:disabled{opacity:0.5;cursor:not-allowed}footer{padding:var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);background:var(--dark-elevated);border-top:1px solid var(--gray-3)}.footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--spacing-xl);margin-bottom:var(--spacing-xl)}.footer-column h3{font-size:18px;margin-bottom:var(--spacing-md);font-weight:700}.footer-column p{color:var(--gray-1);font-size:15px;line-height:1.6}.footer-links{list-style:none}.footer-links li{margin-bottom:var(--spacing-sm)}.footer-links a{color:var(--gray-1);text-decoration:none;transition:var(--transition);font-size:15px;display:flex;align-items:center;gap:8px}.footer-links a:hover{color:var(--primary)}.social-links{display:flex;gap:var(--spacing-sm);margin-top:var(--spacing-md)}.social-link{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--dark-card);border:1px solid var(--gray-3);border-radius:50%;font-size:18px;transition:var(--transition);text-decoration:none;color:var(--light)}.social-link:hover{background:var(--primary);border-color:var(--primary);transform:scale(1.1)}.footer-bottom{text-align:center;padding-top:var(--spacing-lg);border-top:1px solid var(--gray-3)}.footer-bottom p{color:var(--gray-1);font-size:14px}.popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;visibility:hidden;transition:var(--transition)}.popup-overlay.active{opacity:1;visibility:visible}.popup-content{background:var(--dark-card);border-radius:var(--radius-lg);padding:var(--spacing-xl);max-width:500px;width:90%;max-height:80vh;overflow-y:auto;position:relative;transform:scale(0.9);transition:var(--transition)}.popup-overlay.active .popup-content{transform:scale(1)}.popup-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--gray-1);font-size:24px;cursor:pointer;transition:var(--transition)}.popup-close:hover{color:var(--primary)}.popup-title{font-size:24px;font-weight:700;margin-bottom:var(--spacing-md)}.popup-links{display:flex;flex-direction:column;gap:var(--spacing-sm)}.popup-link{display:flex;align-items:center;gap:var(--spacing-sm);padding:var(--spacing-sm);background:var(--dark-elevated);border-radius:var(--radius-sm);text-decoration:none;color:white;transition:var(--transition)}.popup-link:hover{background:var(--primary)}.popup-link-icon{font-size:20px}.coupons-popup-content{max-width:700px;width:90%}.coupons-popup-title{text-align:center;margin-bottom:var(--spacing-lg);font-size:28px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.coupons-popup-list{display:flex;flex-direction:column;gap:var(--spacing-sm);margin-bottom:var(--spacing-lg)}.coupon-popup-item{display:flex;align-items:center;justify-content:space-between;background:var(--dark-elevated);border:1px solid var(--gray-3);border-radius:var(--radius-md);padding:var(--spacing-md);transition:var(--transition)}.coupon-popup-item:hover{border-color:var(--primary);transform:translateX(4px)}.coupon-popup-info{display:flex;align-items:center;gap:var(--spacing-md);flex:1}.coupon-popup-icon{font-size:32px;width:50px;text-align:center}.coupon-popup-details{flex:1}.coupon-popup-title{font-size:16px;font-weight:700;margin-bottom:var(--spacing-xs)}.coupon-popup-code{background:rgba(255,215,0,0.1);border:2px dashed rgba(255,215,0,0.4);border-radius:6px;padding:6px 10px;font-size:14px;font-weight:700;color:#FFD700;font-family:'Courier New',monospace;cursor:pointer;transition:var(--transition);display:inline-block}.coupon-popup-code:hover{background:rgba(255,215,0,0.2);transform:scale(1.05)}.coupon-popup-btn{padding:10px 20px;background:var(--primary);border:none;border-radius:var(--radius-sm);color:white;font-weight:600;font-size:14px;cursor:pointer;transition:var(--transition);text-decoration:none;display:inline-block;white-space:nowrap}.coupon-popup-btn:hover{background:var(--primary-dark);transform:translateY(-2px)}.affiliate-btn{width:100%;padding:16px 24px;background:linear-gradient(135deg,var(--primary),var(--secondary));border:none;border-radius:var(--radius-md);color:white;font-weight:700;font-size:16px;cursor:pointer;transition:var(--transition);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:var(--spacing-md)}.affiliate-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,45,85,0.4)}.resource-content{color:var(--gray-1);line-height:1.7}.resource-content h4{color:var(--light);margin-bottom:var(--spacing-sm);font-size:18px}.resource-content p{margin-bottom:var(--spacing-md)}.resource-content ul{margin-left:var(--spacing-md);margin-bottom:var(--spacing-md)}.resource-content li{margin-bottom:var(--spacing-xs)}@media (max-width:968px){.hero-container{grid-template-columns:1fr;gap:var(--spacing-xl)}.hero-title{font-size:42px}.about-container{grid-template-columns:1fr}.about-stats{grid-template-columns:repeat(3,1fr)}.nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(0,0,0,0.95);flex-direction:column;padding:var(--spacing-md);gap:var(--spacing-sm);border-top:1px solid var(--gray-3);z-index:999}.nav-links.active{display:flex}.mobile-menu-btn{display:flex}.banner-title{font-size:36px}.products-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}.coupon-popup-item{flex-direction:column;align-items:flex-start;gap:var(--spacing-sm)}.coupon-popup-info{width:100%}.coupon-popup-btn{width:100%;text-align:center}}@media (max-width:640px){.hero-title{font-size:36px}.hero-description{font-size:18px}.coupons-grid{grid-template-columns:1fr}.banner-title{font-size:28px}.banner-subtitle{font-size:18px}.search-input{padding:16px 16px 16px 48px}.search-btn{position:static;transform:none;width:100%;margin-top:var(--spacing-sm);border-radius:50px}.about-stats{grid-template-columns:1fr}.pagination{flex-wrap:wrap}}html{scroll-behavior:smooth}.loading{text-align:center;padding:var(--spacing-xl);color:var(--gray-1)}
     </style>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM3D9BS503"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZM3D9BS503');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM3D9BS503"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZM3D9BS503');
+    </script>
 </head>
-
 <body>
-    <!-- Header -->
     <header id="header">
         <div class="header-container">
             <div class="logo">Dylan Zone</div>
-            
             <div class="nav-links">
                 <a href="#products">Products</a>
                 <a href="#" onclick="openCouponsPopup()">Coupons</a>
@@ -1364,40 +29,20 @@
                 <a href="#about">About Us</a>
                 <a href="https://temu.to/k/umeqcy59r0n" target="_blank" class="header-cta">JOIN AND EARN NOW!</a>
             </div>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         </div>
     </header>
-
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span>🔥</span>
-                    <span>New products every day</span>
-                </div>
-                
+                <div class="hero-badge"><span>🔥</span><span>New products every day</span></div>
                 <h1 class="hero-title">Discover Viral Products & Exclusive Offers</h1>
-                
-                <p class="hero-description">
-                    Your premium destination for finding the most innovative gadgets, trending products, and irresistible offers. Save up to 40% on your favorite purchases.
-                </p>
-                
+                <p class="hero-description">Your premium destination for finding the most innovative gadgets, trending products, and irresistible offers. Save up to 40% on your favorite purchases.</p>
                 <div class="hero-buttons">
-                    <a href="#products" class="btn-primary">
-                        <span>Explore Products</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#" class="btn-secondary" onclick="openCouponsPopup()">
-                        <span>View Coupons</span>
-                        <i class="fas fa-ticket-alt"></i>
-                    </a>
+                    <a href="#products" class="btn-primary"><span>Explore Products</span><i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="btn-secondary" onclick="openCouponsPopup()"><span>View Coupons</span><i class="fas fa-ticket-alt"></i></a>
                 </div>
             </div>
-
             <div class="coupons-grid" id="coupons">
                 <div class="coupon-card">
                     <div class="coupon-icon">💰</div>
@@ -1405,21 +50,18 @@
                     <div class="coupon-code" onclick="openLink('https://temu.to/k/p83lb9p29fi')">acy356352</div>
                     <a href="https://temu.to/k/p83lb9p29fi" target="_blank" class="coupon-btn">Activate Now</a>
                 </div>
-
                 <div class="coupon-card">
                     <div class="coupon-icon">🎁</div>
                     <h3 class="coupon-title">Free Gift</h3>
                     <div class="coupon-code" onclick="openLink('https://temu.to/k/u98obio33se')">frv166526</div>
                     <a href="https://temu.to/k/u98obio33se" target="_blank" class="coupon-btn">Redeem Now</a>
                 </div>
-
                 <div class="coupon-card">
                     <div class="coupon-icon">⭐</div>
                     <h3 class="coupon-title">Exclusive Offer</h3>
                     <div class="coupon-code" onclick="openLink('https://temu.to/k/uy9gipqfz7w')">acx326496</div>
                     <a href="https://temu.to/k/uy9gipqfz7w" target="_blank" class="coupon-btn">Get Now</a>
                 </div>
-
                 <div class="coupon-card">
                     <div class="coupon-icon">💎</div>
                     <h3 class="coupon-title">Special Treasure</h3>
@@ -1429,95 +71,49 @@
             </div>
         </div>
     </section>
-
-    <!-- Search Section -->
     <section class="search-section">
         <div class="search-container">
             <h2 class="search-title">Find Your Ideal Product</h2>
-            
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="searchInput" 
-                    placeholder="Search products or codes: headphones, DZ001..."
-                >
+                <input type="text" class="search-input" id="searchInput" placeholder="Search products or codes: headphones, DZ001...">
                 <button class="search-btn" onclick="searchProducts()">Search</button>
             </div>
-            
-            <div class="search-results-text" id="searchResults">
-                Type to search among hundreds of products or codes
-            </div>
+            <div class="search-results-text" id="searchResults">Type to search among hundreds of products or codes</div>
         </div>
     </section>
-
-    <!-- Categories -->
     <section class="categories-section">
         <div class="categories-container">
             <div class="categories-title">Browse by Category</div>
-            
             <div class="categories-grid">
-                <div class="category-chip" onclick="filterCategory('tech')">
-                    🎧 Tech & Gadgets
-                </div>
-                <div class="category-chip" onclick="filterCategory('home')">
-                    🏠 Home
-                </div>
-                <div class="category-chip" onclick="filterCategory('fitness')">
-                    💪 Fitness
-                </div>
-                <div class="category-chip" onclick="filterCategory('beauty')">
-                    💄 Beauty
-                </div>
-                <div class="category-chip" onclick="filterCategory('gaming')">
-                    🎮 Gaming
-                </div>
-                <div class="category-chip" onclick="filterCategory('outdoor')">
-                    🏕️ Outdoor
-                </div>
+                <div class="category-chip" onclick="filterCategory('tech')">🎧 Tech & Gadgets</div>
+                <div class="category-chip" onclick="filterCategory('home')">🏠 Home</div>
+                <div class="category-chip" onclick="filterCategory('fitness')">💪 Fitness</div>
+                <div class="category-chip" onclick="filterCategory('beauty')">💄 Beauty</div>
+                <div class="category-chip" onclick="filterCategory('gaming')">🎮 Gaming</div>
+                <div class="category-chip" onclick="filterCategory('outdoor')">🏕️ Outdoor</div>
             </div>
         </div>
     </section>
-
-    <!-- Products Section -->
     <section class="products-section" id="products">
         <div class="products-container">
             <div class="products-header">
                 <h2>Featured Products</h2>
             </div>
-
-            <div class="products-grid" id="productsGrid">
-                <!-- Products will be loaded here -->
-            </div>
-
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Pagination buttons will be generated here -->
-            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </section>
-
-    <!-- Influencer Banner -->
     <section class="influencer-banner" id="influencer">
         <div class="banner-content">
             <div class="banner-icon">💰</div>
-            
             <h2 class="banner-title">INSTANTLY EARN $240!</h2>
-            
-            <p class="banner-subtitle">
-                Join the Temu Influencers Program + Receive a FREE $399 Product
-            </p>
-            
+            <p class="banner-subtitle">Join the Temu Influencers Program + Receive a FREE $399 Product</p>
             <div class="banner-code-box">
                 <div class="banner-link">🔗 temu.to/k/umeqcy59r0n</div>
                 <div class="banner-code">🔍 inr78404</div>
             </div>
-            
-            <a href="https://temu.to/k/umeqcy59r0n" target="_blank" class="banner-cta">
-                JOIN AND EARN NOW! 🚀
-            </a>
-            
+            <a href="https://temu.to/k/umeqcy59r0n" target="_blank" class="banner-cta">JOIN AND EARN NOW! 🚀</a>
             <div class="banner-benefits">
                 <div class="benefit-chip">💰 Instant Earnings</div>
                 <div class="benefit-chip">🎁 Free Product</div>
@@ -1525,21 +121,12 @@
             </div>
         </div>
     </section>
-
-    <!-- About Section -->
     <section class="about-section" id="about">
         <div class="about-container">
             <div class="about-content">
                 <h2>Your Trusted Online Shopping Guide</h2>
-                
-                <p>
-                    At Dylan Zone, we're passionate about discovering and sharing the best products on the market. From innovative gadgets to essential home items, we carefully curate each product to ensure you get the best quality at the best price.
-                </p>
-                
-                <p>
-                    We work directly with leading platforms like Temu to bring you exclusive offers and discounts you won't find anywhere else. Your satisfaction is our priority.
-                </p>
-                
+                <p>At Dylan Zone, we're passionate about discovering and sharing the best products on the market. From innovative gadgets to essential home items, we carefully curate each product to ensure you get the best quality at the best price.</p>
+                <p>We work directly with leading platforms like Temu to bring you exclusive offers and discounts you won't find anywhere else. Your satisfaction is our priority.</p>
                 <div class="about-stats">
                     <div class="stat-card">
                         <div class="stat-number">500+</div>
@@ -1555,7 +142,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="about-features">
                 <div class="feature-item">
                     <div class="feature-icon">✨</div>
@@ -1564,7 +150,6 @@
                         <p>We personally select each product to ensure exceptional quality and value.</p>
                     </div>
                 </div>
-
                 <div class="feature-item">
                     <div class="feature-icon">🔒</div>
                     <div class="feature-content">
@@ -1572,7 +157,6 @@
                         <p>All our links take you to verified and secure platforms.</p>
                     </div>
                 </div>
-
                 <div class="feature-item">
                     <div class="feature-icon">💰</div>
                     <div class="feature-content">
@@ -1580,7 +164,6 @@
                         <p>Find exclusive offers and coupons that maximize your savings.</p>
                     </div>
                 </div>
-
                 <div class="feature-item">
                     <div class="feature-icon">🚀</div>
                     <div class="feature-content">
@@ -1591,26 +174,17 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">
                 <h3>Dylan Zone</h3>
                 <p>Your personal guide to discovering the most viral, useful, and surprising products in the online market.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link" title="Instagram" onclick="openSocialPopup('instagram')">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" title="TikTok" onclick="openSocialPopup('tiktok')">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="#" class="social-link" title="YouTube" onclick="openSocialPopup('youtube')">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+                    <a href="#" class="social-link" title="Instagram" onclick="openSocialPopup('instagram')"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" title="TikTok" onclick="openSocialPopup('tiktok')"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link" title="YouTube" onclick="openSocialPopup('youtube')"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-
             <div class="footer-column">
                 <h3>Navigation</h3>
                 <ul class="footer-links">
@@ -1620,7 +194,6 @@
                     <li><a href="#about">👥 About Us</a></li>
                 </ul>
             </div>
-
             <div class="footer-column">
                 <h3>Resources</h3>
                 <ul class="footer-links">
@@ -1629,7 +202,6 @@
                     <li><a href="#" onclick="openResourcePopup('contact')">📞 Contact</a></li>
                 </ul>
             </div>
-
             <div class="footer-column">
                 <h3>Legal</h3>
                 <ul class="footer-links">
@@ -1640,18 +212,14 @@
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>&copy; 2025 Dylan Zone. All rights reserved. Discover, Compare, Shop Smart.</p>
         </div>
     </footer>
-
-    <!-- Popup for Coupons - IMPROVED DESIGN -->
     <div class="popup-overlay" id="couponsPopup">
         <div class="popup-content coupons-popup-content">
             <button class="popup-close" onclick="closeCouponsPopup()">&times;</button>
             <h2 class="coupons-popup-title">🎁 Exclusive Coupons</h2>
-            
             <div class="coupons-popup-list">
                 <div class="coupon-popup-item">
                     <div class="coupon-popup-info">
@@ -1663,7 +231,6 @@
                     </div>
                     <a href="https://temu.to/k/p83lb9p29fi" target="_blank" class="coupon-popup-btn">Go to Page</a>
                 </div>
-
                 <div class="coupon-popup-item">
                     <div class="coupon-popup-info">
                         <div class="coupon-popup-icon">🎁</div>
@@ -1674,7 +241,6 @@
                     </div>
                     <a href="https://temu.to/k/u98obio33se" target="_blank" class="coupon-popup-btn">Go to Page</a>
                 </div>
-
                 <div class="coupon-popup-item">
                     <div class="coupon-popup-info">
                         <div class="coupon-popup-icon">⭐</div>
@@ -1685,7 +251,6 @@
                     </div>
                     <a href="https://temu.to/k/uy9gipqfz7w" target="_blank" class="coupon-popup-btn">Go to Page</a>
                 </div>
-
                 <div class="coupon-popup-item">
                     <div class="coupon-popup-info">
                         <div class="coupon-popup-icon">💎</div>
@@ -1697,38 +262,25 @@
                     <a href="https://temu.to/k/uezcb1wqmjb" target="_blank" class="coupon-popup-btn">Go to Page</a>
                 </div>
             </div>
-            
-            <a href="https://temu.to/k/umeqcy59r0n" target="_blank" class="affiliate-btn">
-                <i class="fas fa-user-plus"></i>
-                Join the Temu Affiliate Program
-            </a>
+            <a href="https://temu.to/k/umeqcy59r0n" target="_blank" class="affiliate-btn"><i class="fas fa-user-plus"></i>Join the Temu Affiliate Program</a>
         </div>
     </div>
-
-    <!-- Popup for Social Links -->
     <div class="popup-overlay" id="socialPopup">
         <div class="popup-content">
             <button class="popup-close" onclick="closePopup()">&times;</button>
             <h3 class="popup-title" id="popupTitle">Social Media</h3>
-            <div class="popup-links" id="popupLinks">
-                <!-- Links will be populated here -->
-            </div>
+            <div class="popup-links" id="popupLinks"></div>
         </div>
     </div>
-
-    <!-- Popup for Resources -->
     <div class="popup-overlay" id="resourcePopup">
         <div class="popup-content">
             <button class="popup-close" onclick="closeResourcePopup()">&times;</button>
             <h3 class="popup-title" id="resourceTitle">Resources</h3>
-            <div class="popup-links" id="resourceLinks">
-                <!-- Content will be populated here -->
-            </div>
+            <div class="popup-links" id="resourceLinks"></div>
         </div>
     </div>
-
     <script>
-        // Products Database - NOW WITH IMAGE SUPPORT
+        // Products Database - NO MINIFICADO PARA MANTENER LEGIBILIDAD
         const products = [
             {
                 id: 1,
@@ -1792,475 +344,8 @@
             }
         ];
 
-        // Pagination variables
-        let currentPage = 1;
-        const productsPerPage = 6;
-        let filteredProducts = [...products];
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            initializeHeader();
-            initializeSearch();
-            initializeMobileMenu();
-        });
-
-        // Header scroll effect
-        function initializeHeader() {
-            const header = document.getElementById('header');
-            
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        }
-
-        // Search functionality
-        function initializeSearch() {
-            const searchInput = document.getElementById('searchInput');
-            
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchProducts();
-                }
-            });
-            
-            searchInput.addEventListener('input', function() {
-                if (this.value === '') {
-                    filteredProducts = [...products];
-                    currentPage = 1;
-                    renderProducts();
-                    document.getElementById('searchResults').textContent = 'Type to search among hundreds of products or codes';
-                }
-            });
-        }
-
-        // Mobile menu
-        function initializeMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.querySelector('.nav-links');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                mobileMenuBtn.classList.toggle('active');
-            });
-            
-            // Close menu when clicking on a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
-                });
-            });
-        }
-
-        // Render products with pagination - UPDATED FOR IMAGES
-        function renderProducts() {
-            const productsGrid = document.getElementById('productsGrid');
-            productsGrid.innerHTML = '';
-            
-            // Calculate pagination
-            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-            const startIndex = (currentPage - 1) * productsPerPage;
-            const endIndex = startIndex + productsPerPage;
-            const productsToShow = filteredProducts.slice(startIndex, endIndex);
-            
-            if (productsToShow.length === 0) {
-                productsGrid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
-                        <p style="font-size: 18px; color: var(--gray-1);">No products found matching your search</p>
-                    </div>
-                `;
-                renderPagination(totalPages);
-                return;
-            }
-            
-            productsToShow.forEach((product, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.style.animationDelay = `${index * 0.1}s`;
-                
-                // Determine what to show in the product image
-                let imageContent;
-                if (product.imageType === 'url' || product.imageType === 'local') {
-                    // Use image (URL or local) with fallback to emoji
-                    imageContent = `
-                        <img src="${product.image}" alt="${product.title}" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="product-image-icon" style="display: none;">
-                            ${getFallbackEmoji(product.category)}
-                        </div>
-                    `;
-                } else {
-                    // Use emoji
-                    imageContent = `
-                        <div class="product-image-icon">
-                            ${product.image}
-                        </div>
-                    `;
-                }
-                
-                productCard.innerHTML = `
-                    <div class="product-badge">${product.badge}</div>
-                    <div class="product-image">
-                        ${imageContent}
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">${getCategoryName(product.category)}</div>
-                        <h3 class="product-title">${product.title}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-footer">
-                            <a href="${product.temuLink}" target="_blank" class="product-btn">View Offer</a>
-                        </div>
-                    </div>
-                `;
-                
-                productsGrid.appendChild(productCard);
-            });
-            
-            renderPagination(totalPages);
-        }
-
-        // Get fallback emoji based on category
-        function getFallbackEmoji(category) {
-            const emojiMap = {
-                'tech': '📱',
-                'home': '🏠',
-                'fitness': '💪',
-                'beauty': '💄',
-                'gaming': '🎮',
-                'outdoor': '🏕️'
-            };
-            return emojiMap[category] || '📦';
-        }
-
-        // Render pagination buttons
-        function renderPagination(totalPages) {
-            const paginationContainer = document.getElementById('pagination');
-            paginationContainer.innerHTML = '';
-            
-            if (totalPages <= 1) return;
-            
-            // Previous button
-            const prevButton = document.createElement('button');
-            prevButton.className = 'pagination-btn';
-            prevButton.innerHTML = '&laquo; Previous';
-            prevButton.disabled = currentPage === 1;
-            prevButton.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderProducts();
-                }
-            });
-            paginationContainer.appendChild(prevButton);
-            
-            // Page buttons
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
-                pageButton.textContent = i;
-                pageButton.addEventListener('click', () => {
-                    currentPage = i;
-                    renderProducts();
-                });
-                paginationContainer.appendChild(pageButton);
-            }
-            
-            // Next button
-            const nextButton = document.createElement('button');
-            nextButton.className = 'pagination-btn';
-            nextButton.innerHTML = 'Next &raquo;';
-            nextButton.disabled = currentPage === totalPages;
-            nextButton.addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    renderProducts();
-                }
-            });
-            paginationContainer.appendChild(nextButton);
-        }
-
-        // Search products
-        function searchProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                filteredProducts = [...products];
-                currentPage = 1;
-                renderProducts();
-                document.getElementById('searchResults').textContent = 'Type to search among hundreds of products or codes';
-                return;
-            }
-
-            filteredProducts = products.filter(product => 
-                product.title.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm)
-            );
-
-            currentPage = 1;
-            renderProducts();
-            
-            if (filteredProducts.length === 0) {
-                document.getElementById('searchResults').textContent = `No products found with: "${searchTerm}"`;
-            } else {
-                document.getElementById('searchResults').textContent = `Found ${filteredProducts.length} products`;
-            }
-
-            // Scroll to products
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Filter by category
-        function filterCategory(category) {
-            filteredProducts = products.filter(product => 
-                product.category === category
-            );
-            
-            currentPage = 1;
-            renderProducts();
-            document.getElementById('searchResults').textContent = `Showing products from: ${getCategoryName(category)}`;
-            
-            // Scroll to products
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Get category name
-        function getCategoryName(category) {
-            const categories = {
-                'tech': 'Tech & Gadgets',
-                'home': 'Home',
-                'fitness': 'Fitness & Health',
-                'beauty': 'Beauty',
-                'gaming': 'Gaming',
-                'outdoor': 'Travel & Outdoor'
-            };
-            
-            return categories[category] || category;
-        }
-
-        // Open link in popup
-        function openLink(url) {
-            window.open(url, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
-        }
-
-        // Open coupons popup
-        function openCouponsPopup() {
-            const popup = document.getElementById('couponsPopup');
-            popup.classList.add('active');
-        }
-
-        // Close coupons popup
-        function closeCouponsPopup() {
-            const popup = document.getElementById('couponsPopup');
-            popup.classList.remove('active');
-        }
-
-        // Open social media popup
-        function openSocialPopup(platform) {
-            const popup = document.getElementById('socialPopup');
-            const popupTitle = document.getElementById('popupTitle');
-            const popupLinks = document.getElementById('popupLinks');
-            
-            popupLinks.innerHTML = '';
-            
-            if (platform === 'instagram') {
-                popupTitle.textContent = 'Follow us on Instagram';
-                
-                const instagramLinks = [
-                    { name: 'Dylan Zone Shop', url: 'https://www.instagram.com/dylanzone.shop', icon: 'fab fa-instagram' },
-                    { name: 'Dylan Zone Store', url: 'https://www.instagram.com/dylanzone.store', icon: 'fas fa-tag' },
-                    { name: 'Dylan Zone Reviews', url: 'https://www.instagram.com/dylanzone.reviews', icon: 'fas fa-laptop' }
-                ];
-                
-                instagramLinks.forEach(link => {
-                    const linkElement = document.createElement('a');
-                    linkElement.className = 'popup-link';
-                    linkElement.href = link.url;
-                    linkElement.target = '_blank';
-                    linkElement.innerHTML = `
-                        <span class="popup-link-icon"><i class="${link.icon}"></i></span>
-                        <span>${link.name}</span>
-                    `;
-                    popupLinks.appendChild(linkElement);
-                });
-            } else if (platform === 'tiktok') {
-                popupTitle.textContent = 'Follow us on TikTok';
-                
-                const tiktokLinks = [
-                    { name: 'Dylan Zone Store', url: 'https://tiktok.com/@dylanzone.store', icon: 'fab fa-tiktok' },
-                   
-                ];
-                
-                tiktokLinks.forEach(link => {
-                    const linkElement = document.createElement('a');
-                    linkElement.className = 'popup-link';
-                    linkElement.href = link.url;
-                    linkElement.target = '_blank';
-                    linkElement.innerHTML = `
-                        <span class="popup-link-icon"><i class="${link.icon}"></i></span>
-                        <span>${link.name}</span>
-                    `;
-                    popupLinks.appendChild(linkElement);
-                });
-            } else if (platform === 'youtube') {
-                popupTitle.textContent = 'Follow us on YouTube';
-                
-                const youtubeLinks = [
-                    { name: 'Dylan Zone Store', url: 'https://www.youtube.com/@dylanzone.reviews', icon: 'fab fa-youtube' },
-                  
-                ];
-                
-                youtubeLinks.forEach(link => {
-                    const linkElement = document.createElement('a');
-                    linkElement.className = 'popup-link';
-                    linkElement.href = link.url;
-                    linkElement.target = '_blank';
-                    linkElement.innerHTML = `
-                        <span class="popup-link-icon"><i class="${link.icon}"></i></span>
-                        <span>${link.name}</span>
-                    `;
-                    popupLinks.appendChild(linkElement);
-                });
-            }
-            
-            popup.classList.add('active');
-        }
-
-        // Close popup
-        function closePopup() {
-            const popup = document.getElementById('socialPopup');
-            popup.classList.remove('active');
-        }
-
-        // Open resource popup
-        function openResourcePopup(resource) {
-            const popup = document.getElementById('resourcePopup');
-            const resourceTitle = document.getElementById('resourceTitle');
-            const resourceLinks = document.getElementById('resourceLinks');
-            
-            resourceLinks.innerHTML = '';
-            
-            if (resource === 'guide') {
-                resourceTitle.textContent = '📖 Shopping Guide';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>A curated guide to help you discover the best trending products on the internet. Learn how to compare features, evaluate quality, and make smart buying decisions through Dylan Zone's expert recommendations.</p>
-                    </div>
-                `;
-            } else if (resource === 'faq') {
-                resourceTitle.textContent = '❓ FAQ';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>Find answers to the most common questions about product reviews, shipping details, affiliate links, and how Dylan Zone selects items for daily content.</p>
-                    </div>
-                `;
-            } else if (resource === 'contact') {
-                resourceTitle.textContent = '📞 Contact';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>For any inquiries, suggestions, or collaboration opportunities, please reach out to us:</p>
-                        <ul>
-                            <li>Email: contact@dylanzone.com</li>
-                            <li>Business Inquiries: business@dylanzone.com</li>
-                            <li>Support: support@dylanzone.com</li>
-                        </ul>
-                    </div>
-                `;
-            } else if (resource === 'terms') {
-                resourceTitle.textContent = '📄 Terms of Service';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>By accessing Dylan Zone, you agree to use the site responsibly and understand that the platform participates in affiliate programs. All recommendations are independent and based on trends, research, and user value.</p>
-                    </div>
-                `;
-            } else if (resource === 'privacy') {
-                resourceTitle.textContent = '🔒 Privacy Policy';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>We respect your privacy. Dylan Zone only collects minimal data to improve user experience, such as search preferences and product categories. No personal information is sold or shared with third parties.</p>
-                    </div>
-                `;
-            } else if (resource === 'affiliate') {
-                resourceTitle.textContent = '🤝 Affiliate Policy';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>Some product links on Dylan Zone are affiliate links. If you click and make a purchase, we may earn a small commission — at no extra cost to you. This supports our mission to bring you the best daily product discoveries.</p>
-                    </div>
-                `;
-            } else if (resource === 'cookies') {
-                resourceTitle.textContent = '🍪 Cookies';
-                resourceLinks.innerHTML = `
-                    <div class="resource-content">
-                        <p>Dylan Zone uses cookies to personalize your experience, save your preferences, and analyze website performance. You can disable cookies at any time through your browser settings.</p>
-                    </div>
-                `;
-            }
-            
-            popup.classList.add('active');
-        }
-
-        // Close resource popup
-        function closeResourcePopup() {
-            const popup = document.getElementById('resourcePopup');
-            popup.classList.remove('active');
-        }
-
-        // Close popups when clicking outside
-        document.addEventListener('click', function(e) {
-            const couponsPopup = document.getElementById('couponsPopup');
-            const socialPopup = document.getElementById('socialPopup');
-            const resourcePopup = document.getElementById('resourcePopup');
-            
-            if (couponsPopup.classList.contains('active') && e.target === couponsPopup) {
-                closeCouponsPopup();
-            }
-            if (socialPopup.classList.contains('active') && e.target === socialPopup) {
-                closePopup();
-            }
-            if (resourcePopup.classList.contains('active') && e.target === resourcePopup) {
-                closeResourcePopup();
-            }
-        });
-
-        // Copy coupon code to clipboard
-        function copyCouponCode(code) {
-            navigator.clipboard.writeText(code).then(function() {
-                // Show copied notification
-                const notification = document.createElement('div');
-                notification.textContent = 'Copied to clipboard!';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: var(--success);
-                    color: white;
-                    padding: 12px 20px;
-                    border-radius: var(--radius-sm);
-                    font-weight: 600;
-                    z-index: 3000;
-                    box-shadow: var(--shadow-md);
-                `;
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 2000);
-            });
-        }
-
-        // Add copy functionality to coupon codes
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click event to coupon codes
-            document.querySelectorAll('.coupon-code, .coupon-popup-code').forEach(codeElement => {
-                codeElement.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    copyCouponCode(this.textContent);
-                });
-            });
-        });
+        // JavaScript minificado (excepto la parte de productos)
+        let currentPage=1;const productsPerPage=6;let filteredProducts=[...products];document.addEventListener('DOMContentLoaded',function(){renderProducts();initializeHeader();initializeSearch();initializeMobileMenu()});function initializeHeader(){const header=document.getElementById('header');window.addEventListener('scroll',function(){if(window.scrollY>50){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}})}function initializeSearch(){const searchInput=document.getElementById('searchInput');searchInput.addEventListener('keypress',function(e){if(e.key==='Enter'){searchProducts()}});searchInput.addEventListener('input',function(){if(this.value===''){filteredProducts=[...products];currentPage=1;renderProducts();document.getElementById('searchResults').textContent='Type to search among hundreds of products or codes'}})}function initializeMobileMenu(){const mobileMenuBtn=document.getElementById('mobileMenuBtn');const navLinks=document.querySelector('.nav-links');mobileMenuBtn.addEventListener('click',function(){navLinks.classList.toggle('active');mobileMenuBtn.classList.toggle('active')});document.querySelectorAll('.nav-links a').forEach(link=>{link.addEventListener('click',()=>{navLinks.classList.remove('active');mobileMenuBtn.classList.remove('active')})})}function renderProducts(){const productsGrid=document.getElementById('productsGrid');productsGrid.innerHTML='';const totalPages=Math.ceil(filteredProducts.length/productsPerPage);const startIndex=(currentPage-1)*productsPerPage;const endIndex=startIndex+productsPerPage;const productsToShow=filteredProducts.slice(startIndex,endIndex);if(productsToShow.length===0){productsGrid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:60px 20px"><p style="font-size:18px;color:var(--gray-1)">No products found matching your search</p></div>`;renderPagination(totalPages);return}productsToShow.forEach((product,index)=>{const productCard=document.createElement('div');productCard.className='product-card';productCard.style.animationDelay=`${index*0.1}s`;let imageContent;if(product.imageType==='url'||product.imageType==='local'){imageContent=`<img src="${product.image}" alt="${product.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-image-icon" style="display:none">${getFallbackEmoji(product.category)}</div>`}else{imageContent=`<div class="product-image-icon">${product.image}</div>`}productCard.innerHTML=`<div class="product-badge">${product.badge}</div><div class="product-image">${imageContent}</div><div class="product-info"><div class="product-category">${getCategoryName(product.category)}</div><h3 class="product-title">${product.title}</h3><p class="product-description">${product.description}</p><div class="product-footer"><a href="${product.temuLink}" target="_blank" class="product-btn">View Offer</a></div></div>`;productsGrid.appendChild(productCard)});renderPagination(totalPages)}function getFallbackEmoji(category){const emojiMap={'tech':'📱','home':'🏠','fitness':'💪','beauty':'💄','gaming':'🎮','outdoor':'🏕️'};return emojiMap[category]||'📦'}function renderPagination(totalPages){const paginationContainer=document.getElementById('pagination');paginationContainer.innerHTML='';if(totalPages<=1)return;const prevButton=document.createElement('button');prevButton.className='pagination-btn';prevButton.innerHTML='&laquo; Previous';prevButton.disabled=currentPage===1;prevButton.addEventListener('click',()=>{if(currentPage>1){currentPage--;renderProducts()}});paginationContainer.appendChild(prevButton);for(let i=1;i<=totalPages;i++){const pageButton=document.createElement('button');pageButton.className=`pagination-btn ${i===currentPage?'active':''}`;pageButton.textContent=i;pageButton.addEventListener('click',()=>{currentPage=i;renderProducts()});paginationContainer.appendChild(pageButton)}const nextButton=document.createElement('button');nextButton.className='pagination-btn';nextButton.innerHTML='Next &raquo;';nextButton.disabled=currentPage===totalPages;nextButton.addEventListener('click',()=>{if(currentPage<totalPages){currentPage++;renderProducts()}});paginationContainer.appendChild(nextButton)}function searchProducts(){const searchTerm=document.getElementById('searchInput').value.toLowerCase().trim();if(searchTerm===''){filteredProducts=[...products];currentPage=1;renderProducts();document.getElementById('searchResults').textContent='Type to search among hundreds of products or codes';return}filteredProducts=products.filter(product=>product.title.toLowerCase().includes(searchTerm)||product.description.toLowerCase().includes(searchTerm));currentPage=1;renderProducts();if(filteredProducts.length===0){document.getElementById('searchResults').textContent=`No products found with: "${searchTerm}"`}else{document.getElementById('searchResults').textContent=`Found ${filteredProducts.length} products`}document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})}function filterCategory(category){filteredProducts=products.filter(product=>product.category===category);currentPage=1;renderProducts();document.getElementById('searchResults').textContent=`Showing products from: ${getCategoryName(category)}`;document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})}function getCategoryName(category){const categories={'tech':'Tech & Gadgets','home':'Home','fitness':'Fitness & Health','beauty':'Beauty','gaming':'Gaming','outdoor':'Travel & Outdoor'};return categories[category]||category}function openLink(url){window.open(url,'_blank','width=800,height=600,scrollbars=yes,resizable=yes')}function openCouponsPopup(){const popup=document.getElementById('couponsPopup');popup.classList.add('active')}function closeCouponsPopup(){const popup=document.getElementById('couponsPopup');popup.classList.remove('active')}function openSocialPopup(platform){const popup=document.getElementById('socialPopup');const popupTitle=document.getElementById('popupTitle');const popupLinks=document.getElementById('popupLinks');popupLinks.innerHTML='';if(platform==='instagram'){popupTitle.textContent='Follow us on Instagram';const instagramLinks=[{name:'Dylan Zone Shop',url:'https://www.instagram.com/dylanzone.shop',icon:'fab fa-instagram'},{name:'Dylan Zone Store',url:'https://www.instagram.com/dylanzone.store',icon:'fas fa-tag'},{name:'Dylan Zone Reviews',url:'https://www.instagram.com/dylanzone.reviews',icon:'fas fa-laptop'}];instagramLinks.forEach(link=>{const linkElement=document.createElement('a');linkElement.className='popup-link';linkElement.href=link.url;linkElement.target='_blank';linkElement.innerHTML=`<span class="popup-link-icon"><i class="${link.icon}"></i></span><span>${link.name}</span>`;popupLinks.appendChild(linkElement)})}else if(platform==='tiktok'){popupTitle.textContent='Follow us on TikTok';const tiktokLinks=[{name:'Dylan Zone Store',url:'https://tiktok.com/@dylanzone.store',icon:'fab fa-tiktok'}];tiktokLinks.forEach(link=>{const linkElement=document.createElement('a');linkElement.className='popup-link';linkElement.href=link.url;linkElement.target='_blank';linkElement.innerHTML=`<span class="popup-link-icon"><i class="${link.icon}"></i></span><span>${link.name}</span>`;popupLinks.appendChild(linkElement)})}else if(platform==='youtube'){popupTitle.textContent='Follow us on YouTube';const youtubeLinks=[{name:'Dylan Zone Store',url:'https://www.youtube.com/@dylanzone.reviews',icon:'fab fa-youtube'}];youtubeLinks.forEach(link=>{const linkElement=document.createElement('a');linkElement.className='popup-link';linkElement.href=link.url;linkElement.target='_blank';linkElement.innerHTML=`<span class="popup-link-icon"><i class="${link.icon}"></i></span><span>${link.name}</span>`;popupLinks.appendChild(linkElement)})}popup.classList.add('active')}function closePopup(){const popup=document.getElementById('socialPopup');popup.classList.remove('active')}function openResourcePopup(resource){const popup=document.getElementById('resourcePopup');const resourceTitle=document.getElementById('resourceTitle');const resourceLinks=document.getElementById('resourceLinks');resourceLinks.innerHTML='';if(resource==='guide'){resourceTitle.textContent='📖 Shopping Guide';resourceLinks.innerHTML=`<div class="resource-content"><p>A curated guide to help you discover the best trending products on the internet. Learn how to compare features, evaluate quality, and make smart buying decisions through Dylan Zone's expert recommendations.</p></div>`}else if(resource==='faq'){resourceTitle.textContent='❓ FAQ';resourceLinks.innerHTML=`<div class="resource-content"><p>Find answers to the most common questions about product reviews, shipping details, affiliate links, and how Dylan Zone selects items for daily content.</p></div>`}else if(resource==='contact'){resourceTitle.textContent='📞 Contact';resourceLinks.innerHTML=`<div class="resource-content"><p>For any inquiries, suggestions, or collaboration opportunities, please reach out to us:</p><ul><li>Email: contact@dylanzone.com</li><li>Business Inquiries: business@dylanzone.com</li><li>Support: support@dylanzone.com</li></ul></div>`}else if(resource==='terms'){resourceTitle.textContent='📄 Terms of Service';resourceLinks.innerHTML=`<div class="resource-content"><p>By accessing Dylan Zone, you agree to use the site responsibly and understand that the platform participates in affiliate programs. All recommendations are independent and based on trends, research, and user value.</p></div>`}else if(resource==='privacy'){resourceTitle.textContent='🔒 Privacy Policy';resourceLinks.innerHTML=`<div class="resource-content"><p>We respect your privacy. Dylan Zone only collects minimal data to improve user experience, such as search preferences and product categories. No personal information is sold or shared with third parties.</p></div>`}else if(resource==='affiliate'){resourceTitle.textContent='🤝 Affiliate Policy';resourceLinks.innerHTML=`<div class="resource-content"><p>Some product links on Dylan Zone are affiliate links. If you click and make a purchase, we may earn a small commission — at no extra cost to you. This supports our mission to bring you the best daily product discoveries.</p></div>`}else if(resource==='cookies'){resourceTitle.textContent='🍪 Cookies';resourceLinks.innerHTML=`<div class="resource-content"><p>Dylan Zone uses cookies to personalize your experience, save your preferences, and analyze website performance. You can disable cookies at any time through your browser settings.</p></div>`}popup.classList.add('active')}function closeResourcePopup(){const popup=document.getElementById('resourcePopup');popup.classList.remove('active')}document.addEventListener('click',function(e){const couponsPopup=document.getElementById('couponsPopup');const socialPopup=document.getElementById('socialPopup');const resourcePopup=document.getElementById('resourcePopup');if(couponsPopup.classList.contains('active')&&e.target===couponsPopup){closeCouponsPopup()}if(socialPopup.classList.contains('active')&&e.target===socialPopup){closePopup()}if(resourcePopup.classList.contains('active')&&e.target===resourcePopup){closeResourcePopup()}});function copyCouponCode(code){navigator.clipboard.writeText(code).then(function(){const notification=document.createElement('div');notification.textContent='Copied to clipboard!';notification.style.cssText='position:fixed;top:20px;right:20px;background:var(--success);color:white;padding:12px 20px;border-radius:var(--radius-sm);font-weight:600;z-index:3000;box-shadow:var(--shadow-md)';document.body.appendChild(notification);setTimeout(()=>{document.body.removeChild(notification)},2000)})}document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.coupon-code, .coupon-popup-code').forEach(codeElement=>{codeElement.addEventListener('click',function(e){e.stopPropagation();copyCouponCode(this.textContent)})})});
     </script>
 </body>
 </html>

@@ -137,6 +137,16 @@
             font-size: 24px;
             cursor: pointer;
             color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Hero Section */
@@ -814,19 +824,6 @@
             margin-bottom: var(--spacing-md);
         }
 
-        .product-day-code {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px dashed rgba(255, 215, 0, 0.4);
-            border-radius: 6px;
-            padding: 6px 10px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #FFD700;
-            margin-bottom: var(--spacing-sm);
-            font-family: 'Courier New', monospace;
-            display: inline-block;
-        }
-
         .product-footer {
             display: flex;
             justify-content: space-between;
@@ -1230,10 +1227,23 @@
 
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: var(--spacing-md);
+                gap: var(--spacing-sm);
+                border-top: 1px solid var(--gray-3);
+            }
+
+            .nav-links.active {
+                display: flex;
             }
 
             .mobile-menu-btn {
-                display: block;
+                display: flex;
             }
 
             .banner-title {
@@ -1338,7 +1348,9 @@
                 <a href="https://temu.to/k/umeqcy59r0n" target="_blank" class="header-cta">JOIN AND EARN NOW!</a>
             </div>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -1702,16 +1714,65 @@
         // Products Database - NOW WITH IMAGE SUPPORT
         const products = [
             {
-    id: 1,
-    title: "Portable Wireless LED Desk Lamp",
-    description: "Touch control, 3 color modes, dimmable, adjustable height, 1200mAh battery.",
-    category: "home",
-    badge: "OFFER ⚡",
-    image: "https://i.postimg.cc/GhdVn29n/5f31dfd6-e1a8-49da-917c-fe1e87aea8f4.png",
-    imageType: "url",
-    temuLink: "https://temu.to/k/pevi5y6m1kw"
-}
-
+                id: 1,
+                title: "Portable Wireless LED Desk Lamp",
+                description: "Touch control, 3 color modes, dimmable, adjustable height, 1200mAh battery.",
+                category: "home",
+                badge: "OFFER ⚡",
+                image: "https://i.postimg.cc/GhdVn29n/5f31dfd6-e1a8-49da-917c-fe1e87aea8f4.png",
+                imageType: "url",
+                temuLink: "https://temu.to/k/pevi5y6m1kw"
+            },
+            {
+                id: 2,
+                title: "Wireless Bluetooth Earbuds",
+                description: "Noise cancellation, 30h battery life, IPX7 waterproof, touch control.",
+                category: "tech",
+                badge: "BEST SELLER",
+                image: "🎧",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/p83lb9p29fi"
+            },
+            {
+                id: 3,
+                title: "Smart Fitness Watch",
+                description: "Heart rate monitor, sleep tracking, 20 sports modes, waterproof.",
+                category: "fitness",
+                badge: "NEW",
+                image: "⌚",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/u98obio33se"
+            },
+            {
+                id: 4,
+                title: "Portable Blender",
+                description: "USB rechargeable, 400ml capacity, powerful motor, travel-friendly.",
+                category: "home",
+                badge: "TRENDING",
+                image: "🥤",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/uy9gipqfz7w"
+            },
+            {
+                id: 5,
+                title: "LED Makeup Mirror",
+                description: "3 lighting modes, adjustable brightness, portable design, USB powered.",
+                category: "beauty",
+                badge: "HOT",
+                image: "💄",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/uezcb1wqmjb"
+            },
+            {
+                id: 6,
+                title: "Gaming Mechanical Keyboard",
+                description: "RGB backlight, anti-ghosting, programmable keys, wrist rest included.",
+                category: "gaming",
+                badge: "LIMITED",
+                image: "⌨️",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/umeqcy59r0n"
+            }
         ];
 
         // Pagination variables
@@ -1766,7 +1827,14 @@
             const navLinks = document.querySelector('.nav-links');
             
             mobileMenuBtn.addEventListener('click', function() {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
             });
         }
 
@@ -1825,7 +1893,6 @@
                         <div class="product-category">${getCategoryName(product.category)}</div>
                         <h3 class="product-title">${product.title}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="product-day-code">Code: ${product.dayCode}</div>
                         <div class="product-footer">
                             <a href="${product.temuLink}" target="_blank" class="product-btn">View Offer</a>
                         </div>
@@ -1911,8 +1978,7 @@
 
             filteredProducts = products.filter(product => 
                 product.title.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm) ||
-                product.dayCode.toLowerCase().includes(searchTerm)
+                product.description.toLowerCase().includes(searchTerm)
             );
 
             currentPage = 1;
@@ -2179,6 +2245,3 @@
     </script>
 </body>
 </html>
-
-
-

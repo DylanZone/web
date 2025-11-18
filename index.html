@@ -75,6 +75,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -130,6 +131,7 @@
             transform: scale(1.05);
         }
 
+        /* MEJORA ESPECÍFICA DEL BOTÓN MÓVIL */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -143,10 +145,24 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
+            position: absolute;
+            right: var(--spacing-lg);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
         }
 
         .mobile-menu-btn:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn i {
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn.active i {
+            transform: rotate(90deg);
         }
 
         /* Hero Section */
@@ -1236,6 +1252,7 @@
                 padding: var(--spacing-md);
                 gap: var(--spacing-sm);
                 border-top: 1px solid var(--gray-3);
+                z-index: 999;
             }
 
             .nav-links.active {
@@ -1722,8 +1739,57 @@
                 image: "https://i.postimg.cc/GhdVn29n/5f31dfd6-e1a8-49da-917c-fe1e87aea8f4.png",
                 imageType: "url",
                 temuLink: "https://temu.to/k/pevi5y6m1kw"
+            },
+            {
+                id: 2,
+                title: "Wireless Bluetooth Earbuds",
+                description: "Noise cancellation, 30h battery life, IPX7 waterproof, touch control.",
+                category: "tech",
+                badge: "BEST SELLER",
+                image: "🎧",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/p83lb9p29fi"
+            },
+            {
+                id: 3,
+                title: "Smart Fitness Watch",
+                description: "Heart rate monitor, sleep tracking, 20 sports modes, waterproof.",
+                category: "fitness",
+                badge: "NEW",
+                image: "⌚",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/u98obio33se"
+            },
+            {
+                id: 4,
+                title: "Portable Blender",
+                description: "USB rechargeable, 400ml capacity, powerful motor, travel-friendly.",
+                category: "home",
+                badge: "TRENDING",
+                image: "🥤",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/uy9gipqfz7w"
+            },
+            {
+                id: 5,
+                title: "LED Makeup Mirror",
+                description: "3 lighting modes, adjustable brightness, portable design, USB powered.",
+                category: "beauty",
+                badge: "HOT",
+                image: "💄",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/uezcb1wqmjb"
+            },
+            {
+                id: 6,
+                title: "Gaming Mechanical Keyboard",
+                description: "RGB backlight, anti-ghosting, programmable keys, wrist rest included.",
+                category: "gaming",
+                badge: "LIMITED",
+                image: "⌨️",
+                imageType: "emoji",
+                temuLink: "https://temu.to/k/umeqcy59r0n"
             }
-           
         ];
 
         // Pagination variables
@@ -1779,12 +1845,14 @@
             
             mobileMenuBtn.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
             });
             
             // Close menu when clicking on a link
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
                 });
             });
         }
@@ -2196,4 +2264,3 @@
     </script>
 </body>
 </html>
-
